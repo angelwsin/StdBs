@@ -15,7 +15,7 @@
     http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">  
     <mvc:default-servlet-handler/>
     <!-- 加载包中的controller  注解扫描包 -->  
-   <context:component-scan base-package="com.taskjob.controller"/>  
+   <context:component-scan base-package="com.weixin.controller"/>  
    <!-- 开启注解 -->  
    <context:annotation-config/>
    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->     
@@ -28,7 +28,7 @@
     <aop:pointcut    id="transactionPointcut" expression="execution (*  com.taskjob.service..*.*(..))" />
     <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut"/>
   </aop:config> 
-        <context:component-scan base-package="com.taskjob" />  
+        <context:component-scan base-package="com.weixin" />  
           
         <!-- Handles HTTP GET requests for /static/** by efficiently serving up static resources in the ${webappRoot}/static/ directory -->  
         <mvc:resources mapping="/static/**" location="/static/" />  
@@ -56,7 +56,7 @@
     
     <mvc:interceptors>  
     <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->  
-    <bean class="com.taskjob.web.intercepter.InitContextIntercepter"/> 
+    <bean class="com.weixin.web.intercepter.InitContextIntercepter"/> 
      <!-- 
     <mvc:interceptor>  
         <mvc:mapping path="/test/number.do"/>  

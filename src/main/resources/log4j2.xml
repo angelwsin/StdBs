@@ -12,7 +12,7 @@
 		<Console name="stdout" target="SYSTEM_OUT">
 			<PatternLayout pattern="${CONSOLE_PATTERN}" />
 		</Console>
-
+<!-- 
 		<RollingRandomAccessFile name="appLog" fileName="${LOG_DIR}/app.log" filePattern="${LOG_DIR}/app-%d{yyyy-MM-dd}.log">
 			<PatternLayout pattern="${PATTERN}" />
 			<TimeBasedTriggeringPolicy interval="24" />
@@ -21,17 +21,17 @@
 		<RollingRandomAccessFile name="errorLog" fileName="${LOG_DIR}/error.log" filePattern="${LOG_DIR}/error-%d{yyyy-MM-dd}.log">
 			<PatternLayout pattern="${PATTERN}" />
 			<TimeBasedTriggeringPolicy interval="24" />
-		</RollingRandomAccessFile>
-	</Appenders>
+		</RollingRandomAccessFile>-->
+	</Appenders> 
 
 	<!-- Logger -->
 	<Loggers>
 		<Root>
-			<AppenderRef ref="errorLog" level="error" />
+			<AppenderRef ref="stdout" level="error" />
 		</Root>
 
-		<Logger name="com.p2p" level="debug">
-			<AppenderRef ref="appLog" level="info" />
+		<Logger name="com.weixin" level="debug">
+			<AppenderRef ref="stdout" level="info" />
 			<AppenderRef ref="stdout" />
 		</Logger>
 	</Loggers>

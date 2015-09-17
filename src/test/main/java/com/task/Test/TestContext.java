@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.taskjob.bean.ActCard;
-import com.taskjob.service.ActCardService;
-import com.taskjob.service.ScheduleJobService;
+import com.weixin.bean.ActCard;
+import com.weixn.service.ActCardService;
+import com.weixn.service.ScheduleJobService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
