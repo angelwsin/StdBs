@@ -1,0 +1,2 @@
+ngrok -config ngrok.cfg -subdomain angelwsin 8080
+http://angelwsin.tunnel.mobi/weixin/wxDispatcher
