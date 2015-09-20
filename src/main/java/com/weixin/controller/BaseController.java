@@ -29,7 +29,7 @@ public class BaseController {
 
 	 	}
 
-	 	protected void writeToResponse(HttpServletResponse response, String text,String encoding) {
+	 	protected static void writeToResponse(HttpServletResponse response, String text,String encoding) {
 	 		response.setContentType("text/html;charset=" + encoding);
 	 		try {
 	 			response.getWriter().write(text);
@@ -38,7 +38,7 @@ public class BaseController {
 	 		}
 	 	}
 
-	 	protected void writeToResponse(HttpServletResponse response, String text) {
+	 	public static void  writeToResponse(HttpServletResponse response, String text) {
 	 		writeToResponse(response, text, "utf-8");
 	 	}
 
