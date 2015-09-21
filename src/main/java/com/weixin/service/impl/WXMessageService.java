@@ -19,7 +19,10 @@ public class WXMessageService  implements ApplicationContextAware{
 		// TODO Auto-generated method stub
 		      this.applicationContext = applicationContext;
 	}
-	
+	/*
+	 * 利用spring的事件驱动处理
+	 * 接受微信信息处理的总入口
+	 */
 	public void onMessage(WXMessage message){
 		wxEventMessageApplicationContext.publishEvent(new WXMessageEvent(message));
 	}

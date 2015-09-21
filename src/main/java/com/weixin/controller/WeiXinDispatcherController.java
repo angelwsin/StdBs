@@ -34,7 +34,9 @@ public class WeiXinDispatcherController extends BaseController{
 	        	 }
 	        	   return null;
 	         }
-	         
+	         /*
+	          * 微信接口接入验证
+	          */
 	       private void doGet(HttpServletRequest request,HttpServletResponse response){
 	    	   String signature = request.getParameter("signature");
 	  	       String timestamp = request.getParameter("timestamp");
@@ -48,7 +50,9 @@ public class WeiXinDispatcherController extends BaseController{
 	  	    	 writeToResponse(response, echostr);
 	  	       }
 	       }
-	       
+	       /*
+	        * 微信接口的入口
+	        */
 	       private void doPost(HttpServletRequest request,HttpServletResponse response){
 	    	     
 	    	   try {
