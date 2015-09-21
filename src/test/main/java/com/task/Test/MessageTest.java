@@ -44,6 +44,7 @@ public class MessageTest {
 	   }
 	   @Test
 	   public void test(){
+		  
 		    WXNewsRespMessage msg = new WXNewsRespMessage();
 		    WXNewItmesMessage  t = new WXNewItmesMessage();
 		    t.setDescription("000");
