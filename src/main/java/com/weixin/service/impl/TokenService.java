@@ -12,6 +12,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.HttpClients;
 
 import com.weixin.util.JSONUtil;
@@ -24,7 +25,6 @@ public class TokenService {
 	
 	       public static   String getAcessToken(){
 		          HttpClient  client =  HttpClients.createDefault();
-		         
 		         String url = TOKEN_ACCESS_URL+"&appid="+APPID+"&secret="+SECRET;
 		         HttpGet get = new HttpGet(url);
 		        get.setHeader(" Content-Type", "text/html;charset=utf-8");
