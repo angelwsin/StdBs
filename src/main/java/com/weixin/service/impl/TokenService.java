@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,7 +14,6 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.HttpClients;
 
 import com.weixin.util.JSONUtil;
@@ -21,7 +22,7 @@ public class TokenService {
 	             private static final String APPID ="wx9358ab8a3d283aed";
 	             private static final String SECRET ="f7d86e7711e0e4b4fe6150c54971f6bf";
 	             private static final String TOKEN_ACCESS_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
-	             private static long expiresIn;
+	             private static final ConcurrentMap<String,Object>  tokenMap = new ConcurrentHashMap<String,Object>();
 	
 	       public static   String getAcessToken(){
 		          HttpClient  client =  HttpClients.createDefault();
@@ -55,13 +56,30 @@ public class TokenService {
 		        return null;
 	   }   
 	       
-	     @SuppressWarnings("unchecked")
-		public static String acessToken(){
-	    	    Map<String,String> map =   JSONUtil.getJsonT(getAcessToken(), Map.class);
-	    	    return   map.get("access_token");
+	     public static String acessToken(){
+	    	    if(tokenMap.get("access_token")==null){
+	    	    	tokenCache();
+	    	    }else{
+	    	    	long end  = (Long) tokenMap.get("expires_in");
+	    	    	 if(end-System.currentTimeMillis()<10*1000){
+	    	    	 tokenCache();
+	    	    	 }
+	    	    }
+	    	    return   (String) tokenMap.get("access_token");
 	       }
-	  
+	     
+	     @SuppressWarnings("unchecked")
+		private static  void tokenCache(){
+	    	 Map<String,Object> map =   JSONUtil.getJsonT(getAcessToken(), Map.class);
+	    	    String token =(String) map.get("access_token");
+	    	    if(token!=null){
+		    	    int  expires_in=   	 (Integer) map.get("expires_in");
+		    	    tokenMap.put("access_token", token);
+		    	    tokenMap.put("expires_in", (System.currentTimeMillis()+expires_in*1000));
+	    	    }
+	     }
 	  public static void main(String[] args) {
+		   System.out.println(acessToken());
 		   System.out.println(acessToken());
 	}   
 
