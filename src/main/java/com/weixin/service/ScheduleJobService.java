@@ -1,4 +1,4 @@
-package com.weixn.service;
+package com.weixin.service;
 
 import java.util.List;
 

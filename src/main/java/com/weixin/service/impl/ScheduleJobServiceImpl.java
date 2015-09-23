@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.weixin.bean.ScheduleJob;
 import com.weixin.dao.ScheduleJobDao;
+import com.weixin.service.ScheduleJobService;
 import com.weixin.service.task.SchedulerTaskServiceImpl;
-import com.weixn.service.ScheduleJobService;
 
 
 @Service("scheduleJobServiceImpl")

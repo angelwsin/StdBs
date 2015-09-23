@@ -1,19 +1,22 @@
 package com.weixin.listener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
 
 import com.weixin.event.WXMessageEvent;
-import com.weixin.message.bean.WXUnsubscribeEventMessage;
+import com.weixin.message.bean.WXSubscribeEventMessage;
+import com.weixin.service.UserService;
 
 @Component
-public class WXUnsubscribeEventListener implements SmartApplicationListener{
-
+public class WXSubscribeEventListener implements SmartApplicationListener{
+	    @Autowired
+        private UserService userService;
 	public void onApplicationEvent(ApplicationEvent event) {
 		// TODO Auto-generated method stub
-		 WXUnsubscribeEventMessage MSG =  (WXUnsubscribeEventMessage) event.getSource();
-		 System.out.println(MSG.getFromUserName()+"UNSUB");
+		WXSubscribeEventMessage msg =  (WXSubscribeEventMessage) event.getSource();
+		   userService.subscribe(msg);
 	}
 
 	public int getOrder() {
@@ -28,7 +31,7 @@ public class WXUnsubscribeEventListener implements SmartApplicationListener{
 
 	public boolean supportsSourceType(Class<?> sourceType) {
 		// TODO Auto-generated method stub
-		return sourceType==WXUnsubscribeEventMessage.class;
+		return sourceType==WXSubscribeEventMessage.class;
 	}
 
 }

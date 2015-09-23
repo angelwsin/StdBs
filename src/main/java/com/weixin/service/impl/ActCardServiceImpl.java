@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.weixin.bean.ActCard;
 import com.weixin.cache.ActDataCache;
 import com.weixin.dao.ActCardDao;
-import com.weixn.service.ActCardService;
+import com.weixin.service.ActCardService;
 
 @Service("actCardServiceImpl")
 public class ActCardServiceImpl implements ActCardService{

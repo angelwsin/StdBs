@@ -1,12 +1,13 @@
-package com.weixin.service.impl;
+package com.weixin.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-@Service
+@Component
 public class WXEventMessageApplicationContext extends AbstractXmlApplicationContext{
 	 /*直接拿容器中的
 	  * ApplicationContext自动到本地容器里找一个名字为”“的ApplicationEventMulticaster实现，

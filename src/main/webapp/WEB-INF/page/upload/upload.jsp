@@ -36,7 +36,7 @@ body {
 		<a style="position: relative; top: 8px;" href="javascript:$('#file_upload').uploadifive('upload')">Upload Files</a>
 	</form>
   <div>微信上传临时文件</div>
-  <form id="wxForm" action="https://api.weixin.qq.com/cgi-bin/media/upload" method="post"  enctype="multipart/form-data">
+  <form id="wxForm" action="${root }//upload/wxUpload" method="post"  enctype="multipart/form-data">
        <input type="hidden" name="access_token"  value="${access_token}">
         <input type="hidden" name=" type"  value="${type}">
         <input type="file"  data-type="file"  name="media">
@@ -53,7 +53,7 @@ body {
 				                     },
 				 'fileObjName':"media",
 				'queueID'          : 'queue',
-				'uploadScript'     : 'https://api.weixin.qq.com/cgi-bin/media/upload?access_token=${access_token}&type=${type}',
+				'uploadScript'     : '${root }//upload/wxUpload',
 				'onUploadComplete' : function(file, data) { console.log(data); }
 			});
 			$("#wxUpload").click(function(){

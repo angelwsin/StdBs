@@ -1,4 +1,4 @@
-package com.weixn.service;
+package com.weixin.service;
 
 import java.io.Serializable;
 import java.util.List;

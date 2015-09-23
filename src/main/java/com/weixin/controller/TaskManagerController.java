@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.weixin.bean.ScheduleJob;
+import com.weixin.service.ScheduleJobService;
 import com.weixin.service.task.SchedulerTaskServiceImpl;
 import com.weixin.util.AjaxMessage;
-import com.weixn.service.ScheduleJobService;
 
 
 @Controller

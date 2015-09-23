@@ -1,4 +1,4 @@
-package com.weixn.service;
+package com.weixin.service;
 
 import com.weixin.bean.ActCard;
 import com.weixin.bean.ActDetail;

@@ -25,9 +25,9 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
 import com.weixin.bean.ScheduleJob;
+import com.weixin.service.ScheduleJobService;
 import com.weixin.task.QuartzJobFactory;
 import com.weixin.task.QuartzJobFactoryDisallowConcurrentExecution;
-import com.weixn.service.ScheduleJobService;
 /*spring怎么使用注解在初始化bean的时候init-method指定的方法
  * 用的三种指定特定操作的方法：
 通过实现InitializingBean/DisposableBean 接口来定制初始化之后/销毁之前的操作方法；

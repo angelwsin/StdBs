@@ -11,8 +11,8 @@ import com.weixin.bean.ActCard;
 import com.weixin.bean.ActDetail;
 import com.weixin.bean.User;
 import com.weixin.cache.ActDataCache;
+import com.weixin.service.ActDetailService;
 import com.weixin.util.AjaxMessage;
-import com.weixn.service.ActDetailService;
 
 
 @Controller
@@ -23,7 +23,7 @@ public class ActController extends BaseController{
 	  @RequestMapping(value="/guagugle")
 	  public String  act(HttpServletRequest request){
 		    User user  = new User();
-		    user.setId("1");
+		    user.setId(1);
 		  ActCard card =   ActDataCache.removeFirst();
 		ActDetail d =   actDetailService.saveActToUser(user,card);
 		  request.setAttribute("card", card.getCard());

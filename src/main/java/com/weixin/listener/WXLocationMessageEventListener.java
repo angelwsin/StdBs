@@ -2,10 +2,11 @@ package com.weixin.listener;
 
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
+import org.springframework.stereotype.Component;
 
 import com.weixin.event.WXMessageEvent;
 import com.weixin.message.bean.WXLocationReqMessage;
-
+@Component
 public class WXLocationMessageEventListener implements SmartApplicationListener{
 	public void onApplicationEvent(ApplicationEvent event) {
 		// TODO Auto-generated method stub

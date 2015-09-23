@@ -2,10 +2,11 @@ package com.weixin.listener;
 
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
+import org.springframework.stereotype.Component;
 
 import com.weixin.event.WXMessageEvent;
 import com.weixin.message.bean.WXClickEventMessage;
-
+@Component
 public class WXClickEventListener implements SmartApplicationListener{
 
 	public void onApplicationEvent(ApplicationEvent event) {

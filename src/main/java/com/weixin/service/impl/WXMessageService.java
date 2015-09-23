@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.weixin.event.WXMessageEvent;
 import com.weixin.message.bean.WXMessage;
+import com.weixin.util.WXEventMessageApplicationContext;
 
 @Service
 public class WXMessageService  implements ApplicationContextAware{

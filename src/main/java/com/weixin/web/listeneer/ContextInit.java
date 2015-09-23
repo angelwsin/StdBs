@@ -3,7 +3,7 @@ package com.weixin.web.listeneer;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.weixin.util.SpringUtils;
+import com.weixin.util.Const;
 
 public class ContextInit implements ServletContextListener{
 
@@ -14,7 +14,7 @@ public class ContextInit implements ServletContextListener{
 
 	public void contextInitialized(ServletContextEvent event) {
 		// TODO Auto-generated method stub
-		 SpringUtils.CONTEXT  = event.getServletContext();
+		 Const.CONTEXT  = event.getServletContext();
 	}
 
 }

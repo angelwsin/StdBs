@@ -3,7 +3,7 @@ package com.weixin.service.act.task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.weixn.service.ActCardService;
+import com.weixin.service.ActCardService;
 
 
 @Service("guaTaskService")

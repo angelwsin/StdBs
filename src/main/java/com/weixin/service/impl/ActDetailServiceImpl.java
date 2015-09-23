@@ -9,9 +9,9 @@ import com.weixin.bean.ActCard;
 import com.weixin.bean.ActDetail;
 import com.weixin.bean.User;
 import com.weixin.dao.ActDetailDao;
-import com.weixn.service.ActCardService;
-import com.weixn.service.ActDetailService;
-import com.weixn.service.UserService;
+import com.weixin.service.ActCardService;
+import com.weixin.service.ActDetailService;
+import com.weixin.service.UserService;
 
 @Service
 public class ActDetailServiceImpl implements ActDetailService{

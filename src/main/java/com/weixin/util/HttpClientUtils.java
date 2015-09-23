@@ -37,6 +37,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.weixin.message.bean.WXBaseMessage;
+import com.weixin.message.bean.WXCustTextMessage;
+import com.weixin.message.bean.WXCustTextRespMessage;
+import com.weixin.message.bean.WXMessage;
 import com.weixin.service.impl.TokenService;
 
 public class HttpClientUtils {
@@ -164,14 +168,24 @@ public class HttpClientUtils {
            }
            
            public static void main(String[] args) {
-        	   File file= null;
+        	  /* File file= null;
 		
 				file = new File("C:\\Users\\angelwsin\\Downloads\\1418264418901.jpg");
 			
         	   Map<String,String> params = new HashMap<String,String>();
         	   params.put("access_token", TokenService.acessToken());
         	   params.put("type", "image");
-			   System.out.println(upload("https://api.weixin.qq.com/cgi-bin/media/upload", file, params,true));
+			   System.out.println(upload("https://api.weixin.qq.com/cgi-bin/media/upload", file, params,true));*/
+        	   WXCustTextRespMessage text = new WXCustTextRespMessage();
+        	   text.setTouser("ouoXiwGdF7SWlvaiCli9feLUr6vc");
+        	   text.setMsgtype(WXBaseMessage.MSG_TEXT);
+        	   WXCustTextMessage t = new WXCustTextMessage();
+        	   t.setContent("你是狗");
+        	   text.setText(t);
+        	   Map<String,String> params = new HashMap<String,String>();
+        	   params.put("access_token", TokenService.acessToken());
+        	   params.put("body", JSONUtil.encode(text));
+        	  System.out.println(doPost("https://api.weixin.qq.com/cgi-bin/message/custom/send", null, params, true)); 
 		}
            
            

@@ -11,8 +11,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.weixin.bean.ActCard;
-import com.weixn.service.ActCardService;
-import com.weixn.service.ScheduleJobService;
+import com.weixin.service.ActCardService;
+import com.weixin.service.ScheduleJobService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
