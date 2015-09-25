@@ -168,7 +168,7 @@ public class HttpClientUtils {
            }
            
            public static void main(String[] args) {
-        	  /* File file= null;
+        	 /* File file= null;
 		
 				file = new File("C:\\Users\\angelwsin\\Downloads\\1418264418901.jpg");
 			
@@ -177,12 +177,13 @@ public class HttpClientUtils {
         	   params.put("type", "image");
 			   System.out.println(upload("https://api.weixin.qq.com/cgi-bin/media/upload", file, params,true));*/
         	   WXCustTextRespMessage text = new WXCustTextRespMessage();
-        	   text.setTouser("ouoXiwGdF7SWlvaiCli9feLUr6vc");
+        	   text.setTouser("owFQ-uBg7admIgc7wgcXzkiZa5Mk");
         	   text.setMsgtype(WXBaseMessage.MSG_TEXT);
         	   WXCustTextMessage t = new WXCustTextMessage();
         	   t.setContent("你是狗");
         	   text.setText(t);
         	   Map<String,String> params = new HashMap<String,String>();
+        	   System.out.println(TokenService.acessToken());
         	   params.put("access_token", TokenService.acessToken());
         	   params.put("body", JSONUtil.encode(text));
         	  System.out.println(doPost("https://api.weixin.qq.com/cgi-bin/message/custom/send", null, params, true)); 
@@ -190,42 +191,23 @@ public class HttpClientUtils {
            
            
            public static CloseableHttpClient createSSLClientDefault(){
-
         	   try {
-
         	                SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-
         	                    //信任所有
-
         	                    public boolean isTrusted(X509Certificate[] chain,
-
         	                                    String authType) throws CertificateException {
-
         	                        return true;
-
         	                    }
-
         	                }).build();
-
         	                SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
-
         	                return HttpClients.custom().setSSLSocketFactory(sslsf).build();
-
         	            } catch (KeyManagementException e) {
-
         	                e.printStackTrace();
-
         	            } catch (NoSuchAlgorithmException e) {
-
         	                e.printStackTrace();
-
         	            } catch (KeyStoreException e) {
-
         	                e.printStackTrace();
-
         	            }
-
         	            return  HttpClients.createDefault();
-
         	   }
 }

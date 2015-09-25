@@ -4,20 +4,25 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.weixin.bean.UploadFile;
 import com.weixin.dao.FileDao;
 import com.weixin.message.bean.WXBaseMessage;
 import com.weixin.service.FileService;
 import com.weixin.util.Const;
+import com.weixin.util.HttpClientUtils;
+import com.weixin.util.JSONUtil;
 @Service
 public class FileServiceImpl implements FileService{
 	       @Autowired
             private FileDao fileDao;
-	public void upload(InputStream is, String path, String fileName) throws Exception {
+	public File upload(InputStream is, String path, String fileName) throws Exception {
 		           File file = new File(path);
 		           if(!file.exists()){
 		        	   file.mkdirs();
@@ -35,14 +40,20 @@ public class FileServiceImpl implements FileService{
 					  if(is!=null){
 						   is.close();
 					  }
+					  return file;
         }
 	
-	  public UploadFile  wxUpload(InputStream is, String path, String fileName)throws Exception{
-		                         upload(is, path, fileName);
+	  public UploadFile  wxUpload(InputStream is, String path, String fileName,String type)throws Exception{
+		                      File filep =   upload(is, path, fileName);
+		                  	   Map<String,String> params = new HashMap<String,String>();
+		                  	   params.put("access_token", TokenService.acessToken());
+		                  	   params.put("type", type);
+		          		 String res=HttpClientUtils.upload("https://api.weixin.qq.com/cgi-bin/media/upload", filep, params,true);
+		          		        Map<String,Object> result = JSONUtil.getJsonT(res, Map.class);
 		                         UploadFile file = new UploadFile();
 		                         file.setAddTime(new Date());
 		                         file.setDesc("weixin");
-		                         file.setMediaId("000");
+		                         file.setMediaId((String)result.get("media_id " ));
 		                         file.setThumbMediaId("0000");
 		                         file.setTitle("weixin");
 		                         file.setType(WXBaseMessage.MSG_IMAGE);

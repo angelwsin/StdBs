@@ -19,8 +19,8 @@ import org.apache.http.impl.client.HttpClients;
 import com.weixin.util.JSONUtil;
 
 public class TokenService {
-	             private static final String APPID ="wx9358ab8a3d283aed";
-	             private static final String SECRET ="f7d86e7711e0e4b4fe6150c54971f6bf";
+	             private static final String APPID ="wx75475762bb0ef533";
+	             private static final String SECRET ="dbd1416aacfd23deba93e9b285e3d19c";
 	             private static final String TOKEN_ACCESS_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
 	             private static final ConcurrentMap<String,Object>  tokenMap = new ConcurrentHashMap<String,Object>();
 	

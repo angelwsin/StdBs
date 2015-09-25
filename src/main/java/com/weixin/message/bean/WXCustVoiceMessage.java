@@ -4,6 +4,7 @@ public class WXCustVoiceMessage {
      private String media_id;
 
 	public String getMedia_id() {
+	
 		return media_id;
 	}
 
