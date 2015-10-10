@@ -10,10 +10,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.weixin.bean.UploadFile;
 import com.weixin.dao.FileDao;
 import com.weixin.message.bean.WXBaseMessage;
+import com.weixin.message.bean.WXMessage;
 import com.weixin.service.FileService;
 import com.weixin.util.Const;
 import com.weixin.util.HttpClientUtils;
@@ -43,7 +43,8 @@ public class FileServiceImpl implements FileService{
 					  return file;
         }
 	
-	  public UploadFile  wxUpload(InputStream is, String path, String fileName,String type)throws Exception{
+	  @SuppressWarnings("unchecked")
+	public UploadFile  wxUpload(InputStream is, String path, String fileName,String type)throws Exception{
 		                      File filep =   upload(is, path, fileName);
 		                  	   Map<String,String> params = new HashMap<String,String>();
 		                  	   params.put("access_token", TokenService.acessToken());
@@ -61,6 +62,25 @@ public class FileServiceImpl implements FileService{
 		                         fileDao.save(file);
 		                        return file;
 	  }
+
+	public File uploadEventFile(String  url, String fileName,WXMessage msg) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(msg.getMsgType());
+		String path = Const.contextPath+"upload/image/";
+		File filep =   upload(HttpClientUtils.downLoad(url,null), path, fileName);
+		UploadFile file = new UploadFile();
+        file.setAddTime(new Date());
+        file.setDesc("weixin");
+        file.setMediaId("00");
+        file.setThumbMediaId("0000");
+        file.setTitle("weixin");
+        file.setType(msg.getMsgType());
+        file.setUrl(Const.TEST_PATH+Const.UPLOAD_DIR.get(msg.getMsgType())+fileName);
+        fileDao.save(file);
+		return filep;
+	}
+
+	
 	}
 
 	    

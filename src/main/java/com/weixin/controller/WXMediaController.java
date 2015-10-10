@@ -38,7 +38,7 @@ public class WXMediaController extends BaseController{
         	    	 int index = file.getOriginalFilename().lastIndexOf(".");
         	    	 String sub = index!=-1? file.getOriginalFilename().substring(index):"";
         	    	try {
-				fileService.wxUpload(file.getInputStream(), uploadDir, System.currentTimeMillis()+sub);
+			//	fileService.wxUpload(file.getInputStream(), uploadDir, System.currentTimeMillis()+sub);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

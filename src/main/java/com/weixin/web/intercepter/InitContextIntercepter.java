@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.weixin.util.Const;
+
 public class InitContextIntercepter implements HandlerInterceptor{
 
 	public boolean preHandle(HttpServletRequest request,
@@ -25,6 +27,9 @@ public class InitContextIntercepter implements HandlerInterceptor{
 			String path = request.getContextPath();
 			String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 			application.setAttribute("root",basePath);
+		}
+		if(Const.contextPath==null){
+			Const.contextPath=  request.getServletContext().getRealPath("/");
 		}
 	}
 
