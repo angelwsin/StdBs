@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.weixin.exception.BusinessException;
 import com.weixin.util.JSONUtil;
 
 
@@ -41,5 +43,7 @@ public class BaseController {
 	 	public static void  writeToResponse(HttpServletResponse response, String text) {
 	 		writeToResponse(response, text, "utf-8");
 	 	}
+	 	
+	 	
 
 }
