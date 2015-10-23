@@ -1,2 +1,7 @@
 ngrok -config ngrok.cfg -subdomain angelwsin 8080
 http://angelwsin.tunnel.mobi/weixin/wxDispatcher
+
+社交  了解需求   来源
+商家品台   满足需求
+支付       资金
+信用 
