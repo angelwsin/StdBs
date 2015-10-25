@@ -18,6 +18,7 @@
  */
 package  com.weixin.bean;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -27,7 +28,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -47,14 +51,10 @@ public class Role {
 
     private String description;
 
-    private Set<String> permissions;
+    private Set<Permission> permissions;
 
-    protected Role() {
-    }
-
-    public Role(String name) {
-        this.name = name;
-    }
+   
+    
 
 
     @Id
@@ -88,16 +88,27 @@ public class Role {
         this.description = description;
     }
 
-    @CollectionTable
+    @OneToMany
     @JoinTable(name="roles_permissions")
     @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-    public Set<String> getPermissions() {
-        return permissions;
-    }
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
 
-    public void setPermissions(Set<String> permissions) {
-        this.permissions = permissions;
-    }
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
+	@Transient  
+    public Set<String> getPermissionsByRole(){  
+        Set<String> set=new HashSet<String>();  
+        for (Permission perm :getPermissions()) {  
+            set.add(perm.getPermission());  
+        }  
+        return set;  
+    }  
+	
+    
 
 }
 

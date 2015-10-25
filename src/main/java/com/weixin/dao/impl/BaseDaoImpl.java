@@ -19,9 +19,9 @@ import com.weixin.dao.BaseDao;
 /*
  * Hibernate3 dao层支持事物  Hibernate4 dao层不支持事物
  */
-@Repository
+@Repository(value="baseDao")
 @Transactional
-public abstract class BaseDaoImpl<T> implements BaseDao<T> {
+public  class BaseDaoImpl<T> implements BaseDao<T> {
 	
 	    private SessionFactory sessionFactory;
 	    protected Class<T> clazz;

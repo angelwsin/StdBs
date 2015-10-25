@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-     <form action="${root}/test/post" method="post">
+     <form action="${root}/admin/home/login" method="post">
         username:<input type="text" name="username"><br>
         password:<input type="password" name="password"><br>
         <input type="submit" value="登录">

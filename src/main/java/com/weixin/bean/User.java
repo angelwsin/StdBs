@@ -3,6 +3,7 @@ package com.weixin.bean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -112,7 +114,7 @@ public class User implements Serializable{
 		this.bindStatus = bindStatus;
 	}
 	
-	 @ManyToMany
+	    @ManyToMany
 	    @JoinTable(name="users_roles")
 	    @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	    public Set<Role> getRoles() {
@@ -122,6 +124,15 @@ public class User implements Serializable{
 	    public void setRoles(Set<Role> roles) {
 	        this.roles = roles;
 	    }
+	    
+	    @Transient  
+	    public Set<String> getRolesName(){  
+	        Set<String> set=new HashSet<String>();  
+	        for (Role role :getRoles()) {  
+	            set.add(role.getName());  
+	        }  
+	        return set;  
+	    }  
 	
 	
 }
