@@ -2,13 +2,20 @@ package com.weixin.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 //当前的类是一个持久化类，是Category这个类。他映射了一个表category。所对应的 数据库是test
 //这句：@Table(name="user",catalog="test") 可以省略
@@ -26,6 +33,7 @@ public class User implements Serializable{
 	  private Date addTime;
 	  private String phone;
 	  private int  bindStatus;
+	  private Set<Role> roles = new HashSet<Role>();
 	// 主键 ：@Id    主键生成方式：strategy = "increment"
   //映射表中id这个字段，不能为空，并且是唯一的
 	//@GenericGenerator(name = "generator", strategy = "increment")
@@ -103,6 +111,17 @@ public class User implements Serializable{
 	public void setBindStatus(int bindStatus) {
 		this.bindStatus = bindStatus;
 	}
+	
+	 @ManyToMany
+	    @JoinTable(name="users_roles")
+	    @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	    public Set<Role> getRoles() {
+	        return roles;
+	    }
+
+	    public void setRoles(Set<Role> roles) {
+	        this.roles = roles;
+	    }
 	
 	
 }

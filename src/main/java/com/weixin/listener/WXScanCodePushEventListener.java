@@ -5,14 +5,14 @@ import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
 
 import com.weixin.event.WXMessageEvent;
-import com.weixin.message.bean.WXClickEventMessage;
+import com.weixin.message.bean.WXScanCodePushMessage;
 @Component
-public class WXClickEventListener implements SmartApplicationListener{
+public class WXScanCodePushEventListener implements SmartApplicationListener{
 
 	public void onApplicationEvent(ApplicationEvent event) {
 		// TODO Auto-generated method stub
-		WXClickEventMessage msg = 	(WXClickEventMessage) event.getSource();
-		System.out.println(msg.getEvent());
+		WXScanCodePushMessage msg = 	(WXScanCodePushMessage) event.getSource();
+		System.out.println(msg.getScanCodeInfo().getScanResult());
 	}
 
 	public int getOrder() {
@@ -27,7 +27,7 @@ public class WXClickEventListener implements SmartApplicationListener{
 
 	public boolean supportsSourceType(Class<?> sourceType) {
 		// TODO Auto-generated method stub
-		return sourceType==WXClickEventMessage.class;
+		return sourceType==WXScanCodePushMessage.class;
 	}
 
 }

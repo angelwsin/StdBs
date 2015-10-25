@@ -11,6 +11,7 @@ import com.weixin.message.bean.WXBaseMessage;
 public class Const {
      
 	 public  static  ServletContext CONTEXT ;
+	 public static   String contextPath;
 	 public static final  ConcurrentMap<String,String> UPLOAD_DIR =new ConcurrentHashMap<String, String>();
 	 static{
 		 UPLOAD_DIR.put(WXBaseMessage.MSG_IMAGE, File.separator+"upload"+File.separator+"image");

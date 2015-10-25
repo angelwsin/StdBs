@@ -5,14 +5,15 @@ import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
 
 import com.weixin.event.WXMessageEvent;
-import com.weixin.message.bean.WXClickEventMessage;
+import com.weixin.message.bean.WXPicSysPhotoMessage;
 @Component
-public class WXClickEventListener implements SmartApplicationListener{
+public class WXPicSysphotoEventListener implements SmartApplicationListener {
 
 	public void onApplicationEvent(ApplicationEvent event) {
 		// TODO Auto-generated method stub
-		WXClickEventMessage msg = 	(WXClickEventMessage) event.getSource();
-		System.out.println(msg.getEvent());
+		WXPicSysPhotoMessage msg=  (WXPicSysPhotoMessage) event.getSource();
+		  System.out.println(msg.getSendPicsInfo().getPicList().get(0).getPicMd5Sum());
+		
 	}
 
 	public int getOrder() {
@@ -27,7 +28,7 @@ public class WXClickEventListener implements SmartApplicationListener{
 
 	public boolean supportsSourceType(Class<?> sourceType) {
 		// TODO Auto-generated method stub
-		return sourceType==WXClickEventMessage.class;
+		return sourceType==WXPicSysPhotoMessage.class;
 	}
 
 }

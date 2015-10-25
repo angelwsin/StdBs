@@ -1,5 +1,8 @@
 package com.weixin.message.bean;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("item")
 public class WXNewItmesMessage {
 	/*Articles	是	多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应
 	Title	否	图文消息标题

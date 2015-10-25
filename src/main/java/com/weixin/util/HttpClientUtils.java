@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +26,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -40,7 +42,6 @@ import org.apache.http.message.BasicNameValuePair;
 import com.weixin.message.bean.WXBaseMessage;
 import com.weixin.message.bean.WXCustTextMessage;
 import com.weixin.message.bean.WXCustTextRespMessage;
-import com.weixin.message.bean.WXMessage;
 import com.weixin.service.impl.TokenService;
 
 public class HttpClientUtils {
@@ -89,13 +90,17 @@ public class HttpClientUtils {
            	    	  }
            	    }
            	 List<NameValuePair> nvps = new ArrayList <NameValuePair>();  
-             
+        
              Set<String> keySet = params.keySet();  
              for(String key : keySet) {  
                  nvps.add(new BasicNameValuePair(key, params.get(key)));  
              }  
              try {
-				post.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+            	// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nvps, "UTF-8");
+            	 HttpEntity entity=    EntityBuilder.create().setParameters(nvps).build();
+            	  System.out.println(nvps.get(1).getValue());
+            	 System.out.println(StringUtils.streamToStringReader(entity.getContent()));
+				post.setEntity(entity);
 				HttpResponse response  =client.execute(post);
 				return httpClientResponse(response);
 			} catch (Exception e) {
@@ -166,7 +171,36 @@ public class HttpClientUtils {
 			}
              return null;
            }
-           
+           public static InputStream downLoad(String url,Map<String,String> params ){
+        	   HttpClient  client =  HttpClients.createDefault();
+       	    HttpGet get = new HttpGet();
+       	   get.setHeader("Content-Type", "text/html;charset=utf-8");
+       	    StringBuffer buffer = new StringBuffer(url);
+       	    if(params!=null){
+       	    	 buffer.append("?");
+            	    for(String key:params.keySet()){
+    	    		     buffer.append(key).append("=").append(params.get(key)).append("&");
+    	    	  }
+            	   if(buffer.lastIndexOf("&")!=-1){
+            		    buffer.deleteCharAt(buffer.lastIndexOf("&"));
+            	   }
+       	    }
+				try {
+					get.setURI(new URI(buffer.toString()));
+					HttpResponse response = client.execute(get);
+					StatusLine status = response.getStatusLine();
+		        	if(status.getStatusCode()==200){
+		        		 // 获取响应消息实体  
+		                HttpEntity entity = response.getEntity();    
+					return entity.getContent();
+		        	}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+         
+           }
            public static void main(String[] args) {
         	 /* File file= null;
 		

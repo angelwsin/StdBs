@@ -1,4 +1,11 @@
 ngrok -config ngrok.cfg -subdomain angelwsin 8080
 http://angelwsin.tunnel.mobi/weixin/wxDispatcher
 
+<<<<<<< HEAD
 mvn install:install-file  -Dfile=C:\Users\angel\Downloads\androidannotations-api-3.3.2.jar  -DgroupId=org.androidannotations  -DartifactId=androidannotations-api -Dversion=3.3.2 -Dpackaging=jar
+=======
+社交  了解需求   来源
+商家品台   满足需求
+支付       资金
+信用 
+>>>>>>> branch 'master' of https://github.com/angelwsin/weixin.git
