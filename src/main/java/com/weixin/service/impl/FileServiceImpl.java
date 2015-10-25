@@ -43,17 +43,18 @@ public class FileServiceImpl implements FileService{
 					  return file;
         }
 	
-	  public UploadFile  wxUpload(InputStream is, String path, String fileName,String type)throws Exception{
+	  @SuppressWarnings("unchecked")
+	public UploadFile  wxUpload(InputStream is, String path, String fileName,String type)throws Exception{
 		                      File filep =   upload(is, path, fileName);
 		                  	   Map<String,String> params = new HashMap<String,String>();
 		                  	   params.put("access_token", TokenService.acessToken());
 		                  	   params.put("type", type);
-		          		 String res=HttpClientUtils.upload("https://api.weixin.qq.com/cgi-bin/media/upload", filep, params,true);
+		          		      String res=HttpClientUtils.upload("https://api.weixin.qq.com/cgi-bin/media/upload", filep, params,true);
 		          		        Map<String,Object> result = JSONUtil.getJsonT(res, Map.class);
 		                         UploadFile file = new UploadFile();
 		                         file.setAddTime(new Date());
 		                         file.setDesc("weixin");
-		                         file.setMediaId((String)result.get("media_id " ));
+		                         file.setMediaId((String)result.get("media_id" ));
 		                         file.setThumbMediaId("0000");
 		                         file.setTitle("weixin");
 		                         file.setType(WXBaseMessage.MSG_IMAGE);
