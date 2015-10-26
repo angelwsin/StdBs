@@ -2,6 +2,7 @@ package com.task.Test;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
@@ -65,6 +66,8 @@ public class UserTest {
               Resource res = new Resource();
               res.setPermissions("anon");
               res.setValue("/index");
-              resourceService.save(res);
+             // resourceService.save(res);
+   
+       
         }
 }

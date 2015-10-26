@@ -29,14 +29,19 @@ public abstract class AbstractChainDefinitionSectionMetaSource implements ChainD
     /** 读取配置资源 */  
     private Section obtainPermission() {  
         Ini ini = new Ini();  
-        ini.load(definitions); // 加载资源文件节点串  
+        StringBuffer sb = new StringBuffer(definitions);
+        Map<String, String> permissionMap = initOtherPermission();  
+        if (permissionMap != null && !permissionMap.isEmpty()) {  
+            //section.putAll(permissionMap);  
+        	  for(String key :permissionMap.keySet()){
+        		  sb.append(key).append('=').append(permissionMap.get(key)).append(ChainDefinitionSectionMetaSourceService.CRLF);
+        	  }
+        }  
+        sb.append(ChainDefinitionSectionMetaSourceService.LAST_AUTH_STR);
+        ini.load(sb.toString()); // 加载资源文件节点串  
         Section section = ini.getSection("urls"); // 使用默认节点  
         if (CollectionUtils.isEmpty(section)) {  
             section = ini.getSection(Ini.DEFAULT_SECTION_NAME); // 如不存在默认节点切割,则使用空字符转换  
-        }  
-        Map<String, String> permissionMap = initOtherPermission();  
-        if (permissionMap != null && !permissionMap.isEmpty()) {  
-            section.putAll(permissionMap);  
         }  
         return section;  
     }
@@ -77,6 +82,7 @@ public abstract class AbstractChainDefinitionSectionMetaSource implements ChainD
 	            for (Map.Entry<String, String> entry : chains.entrySet()) {  
 	                String url = entry.getKey();  
 	                String chainDefinition = entry.getValue().trim().replace(" ", "");  
+	                System.out.println(url+"--->"+chainDefinition);
 	                manager.createChain(url, chainDefinition);  
 	            }  
 	  

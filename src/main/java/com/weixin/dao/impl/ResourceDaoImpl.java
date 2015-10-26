@@ -15,10 +15,9 @@ public class ResourceDaoImpl extends BaseDaoImpl<Resource> implements ResourceDa
 	public Map<String, String> getSectionMeta() {
 		// TODO Auto-generated method stub
 		     Map<String,String> map = new HashMap<String,String>();
-		     List<Object[]>   list =   getSession().createQuery("select value,permissions from "+getClass()).list();
-		      for(int i=0;list!=null&&i<list.size();i++){
-		    	    map.put((String)list.get(i)[0],(String) list.get(i)[1]);
-		    	    System.out.println((String)list.get(i)[0]);
+		     List<Resource> list =     findObjectByMap(new HashMap<String, Object>());
+		    for(int i=0;list!=null&&i<list.size();i++){
+		    	    map.put(list.get(i).getValue(),list.get(i).getPermissions());
 		      }
 		return map;
 	}
