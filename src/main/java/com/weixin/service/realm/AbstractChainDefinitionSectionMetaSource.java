@@ -76,13 +76,12 @@ public abstract class AbstractChainDefinitionSectionMetaSource implements ChainD
 	            shiroFilterFactoryBean.getFilterChainDefinitionMap().clear();  
 	  
 	            // 重新构建生成  
-	            shiroFilterFactoryBean.setFilterChainDefinitions(definitions);  
+	            shiroFilterFactoryBean.setFilterChainDefinitionMap(obtainPermission());  
 	            Map<String, String> chains = shiroFilterFactoryBean.getFilterChainDefinitionMap();  
 	  
 	            for (Map.Entry<String, String> entry : chains.entrySet()) {  
 	                String url = entry.getKey();  
 	                String chainDefinition = entry.getValue().trim().replace(" ", "");  
-	                System.out.println(url+"--->"+chainDefinition);
 	                manager.createChain(url, chainDefinition);  
 	            }  
 	  
