@@ -13,9 +13,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.weixin.bean.Permission;
+import com.weixin.bean.Resource;
 import com.weixin.bean.Role;
 import com.weixin.bean.User;
 import com.weixin.service.PermissionService;
+import com.weixin.service.ResourceService;
 import com.weixin.service.RoleService;
 import com.weixin.service.UserService;
 
@@ -30,18 +32,22 @@ public class UserTest {
 	private PermissionService permissionService;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private ResourceService resourceService;
 	  @Test
         public void saveTestP(){
 		   Permission p = new Permission();
 		   p.setDescription("查看");
 		   p.setPermission("query");
 		   Set pers  =new HashSet();
+		   
 		   pers.add(p);
 		   Set roles = new HashSet();
 		    Role r = new Role();
 		    r.setName("manager");
-		    r.setDescription("管理员");
+		    r.setDescription("manager");
 		    r.setPermissions(pers);
+		  
 		    roles.add(r);
              User user = new User();
              user.setAddTime(new Date());
@@ -50,11 +56,15 @@ public class UserTest {
              user.setEmail("angelwsin@163.com");
              user.setPassword("123456");
              user.setPhone("12434455");
-           //  user.setRoles(roles);
+             user.setRoles(roles);
               user.setStatus(0);
               user.setUsername("zhangsan");
             //  permissionService.save(p);
-             // roleService.save(r);
-             userService.save(user);
+              //roleService.save(r);
+             //userService.save(user);
+              Resource res = new Resource();
+              res.setPermissions("anon");
+              res.setValue("/index");
+              resourceService.save(res);
         }
 }
