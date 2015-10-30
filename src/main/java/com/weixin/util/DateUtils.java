@@ -1,5 +1,7 @@
 package com.weixin.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -83,5 +85,16 @@ public class DateUtils {
 	  public static void main(String[] args) {
 		         System.out.println(getDay(new Date()));
 	}
+	  public static Date parseToDate(String date,String pattern){
+		    SimpleDateFormat format = new SimpleDateFormat(pattern);
+		   try {
+			return format.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;	
+		   
+	  }
 
 }

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.weixin.bean.Page;
 import com.weixin.dao.BaseDao;
 import com.weixin.service.BaseService;
 
@@ -25,8 +26,16 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 				// TODO Auto-generated method stub
 				return baseDao.findAll(clazz);
 			}
+
+			public List<T> queryByPage(String clazz, Page<T> page) {
+				// TODO Auto-generated method stub
+				String hql = "from "+clazz;
+				page.setTotal(baseDao.getTotalRows(hql));
+				page.setTotalPage(page.getCountPage());
+                return baseDao.queryByPage(hql, page);
+			}
 	        
-	        
+	       
 	      
 
 }

@@ -9,12 +9,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.weixin.bean.Page;
 import com.weixin.dao.BaseDao;
 /*
  * Hibernate3 dao层支持事物  Hibernate4 dao层不支持事物
@@ -89,9 +91,28 @@ public  class BaseDaoImpl<T> implements BaseDao<T> {
 		      return   (T) getSession().get(getClazz(),id);
 	 }
 
+	@SuppressWarnings("unchecked")
 	public List<T> findAll(String clazz) {
 		// TODO Auto-generated method stub
 		return getSession().createQuery("from "+clazz).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> queryByPage(String hql,Page<T> page) {
+		// TODO Auto-generated method stub
+		Query query = getSession().createQuery(hql);
+		query.setFirstResult(page.getStartPage());
+		query.setMaxResults(page.getPageSize());
+		page.setList(query.list());
+		return query.list();
+	}
+
+	public int getTotalRows(String hql) {
+		// TODO Auto-generated method stub
+		 String Hql = "select count(0) "+hql;
+		Query query = getSession().createQuery(Hql);
+		 Long c =(Long) query.uniqueResult();
+		return c.intValue();
 	}
 	 
 	 

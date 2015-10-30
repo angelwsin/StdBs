@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.hibernate.SessionFactory;
 
+import com.weixin.bean.Page;
+
 public interface BaseDao<T> {
 	 public void save(T entiry);
 	 public List<T> findAll();
@@ -14,5 +16,8 @@ public interface BaseDao<T> {
 	 public void saveOrUpdate(T entiry);
 	 public SessionFactory getSessionFactory() ;
 	 public List<T> findAll(String clazz);
+	 public List<T> queryByPage(String HQL, Page<T> page);
+     public  int  getTotalRows(String hql);
+
 
 }

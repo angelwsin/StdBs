@@ -1,14 +1,15 @@
 package com.weixin.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.weixin.exception.BusinessException;
 import com.weixin.util.JSONUtil;
 
 
@@ -44,6 +45,16 @@ public class BaseController {
 	 		writeToResponse(response, text, "utf-8");
 	 	}
 	 	
+	 	
+	 	public  Map<String,Object>  requestToMap(HttpServletRequest request){
+	 		Enumeration<String>  paramNames =   request.getParameterNames();
+	 		Map<String,Object> map = new HashMap<String, Object>();
+	 		 while(paramNames.hasMoreElements()){
+	 			 String param = paramNames.nextElement();
+	 			 map.put(param, request.getParameter(param));
+	 		 }
+	 		 return map;
+	 	}
 	 	
 
 }

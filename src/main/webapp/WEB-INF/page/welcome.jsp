@@ -6,49 +6,88 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- The jQuery library is a prerequisite for all jqSuite products -->
-    <script type="text/ecmascript" src="js/jquery.min.js"></script> 
-    <!-- We support more than 40 localizations -->
-    <script type="text/ecmascript" src="js/i18n/grid.locale-en.js"></script>
-    <!-- This is the Javascript file of jqGrid -->   
-    <script type="text/ecmascript" src="js/jquery.jqGrid.min.js"></script>
-    <!-- This is the localization file of the grid controlling messages, labels, etc.
-    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"> 
-    <!-- The link to the CSS that the grid needs -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid-bootstrap.css" />
-	<script>
-		$.jgrid.defaults.width = 780;
-	</script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
+<%@include file="comm/header.jsp" %>
+<style type="text/css">
+.ui-th-column-header
+{
+ text-align: center;
+}
+</style>
 </head>
 <body style="width: 100%">
-  <div style="margin: 50px  100px  200px 260px ;width: 80%">
+  <div style="margin: 50px  100px  200px 100px ;width: 80%">
     <table id="jqGrid" ></table>
     <div id="jqGridPager"></div>
 </div>
+ 
 </body>
 <script type="text/javascript"> 
         $(document).ready(function () {
+        	var grid = $("#jqGrid"); 
             $("#jqGrid").jqGrid({
                 url: '${root}/manager/User',
                 mtype: "GET",
 				styleUI : 'Bootstrap',
                 datatype: "json",
+                colNames: ["姓名", "邮件", "密码", "状态", "添加时间"],  
                 colModel: [
-                    { label: 'username', name: 'username', key: true, width: 500 },
-                    { label: 'email', name: 'email', width: 150 },
-                    { label: 'password', name: 'password', width: 150 },
-                    { label: 'status', name: 'status', width: 150 },
-                    { label:'addTime', name: 'addTime', width: 300 }
+                    {  name: 'username', key: true, width: 500, align: "center"},
+                    { name: 'email', width: 150, align: "center",editable:true },
+                    {   name: 'password', width: 150 , align: "center",editable:true},
+                    { name: 'status', width: 150, align: "center",editable:true },
+                    { name: 'addTime', width: 300 , align: "center",editable:true}
                 ],
+                scroll:false,
+                gridComplete: function(){//caption居中
+                            $('#jqGrid').closest("div.ui-jqgrid-view")
+                                .children("div.ui-jqgrid-titlebar")
+                	                .css("text-align", "center")
+                	                 .children("span.ui-jqgrid-title")
+                	                .css("float", "none");
+                	         },
+                editurl:'${root}/manager/User/add',
+                caption:'用户信息列表',
+                rowList:[10,20,30],
 				viewrecords: true,
-                height: 250,
+                height: 400,
                 rowNum: 10,
-                width:600,
+                autowidth:true,
+                rownumbers:true,//添加左侧行号
+                jsonReader:{
+                	 root: "list",//返回的数组集合
+                    id: "id",//设置返回参数中，表格ID的名字为id
+                    total: "totalPage", //总页数 
+                    page: "curPage",//当前页数
+                    records: "total",//总行数 
+                    repeatitems : false
+                },
                 pager: "#jqGridPager"
-            });
+            }).navGrid('#jqGridPager', 
+            		{ add: true, edit: true, del: true,search:true,refresh:true },
+            			{ beforeShowForm: function(form) {
+            			     // "editmodlist"
+            			     var dlgDiv = $("#editmod" + grid[0].id);
+            			     var parentDiv = dlgDiv.parent(); // div#gbox_list
+            			     var dlgWidth = dlgDiv.width();
+            			     var parentWidth = parentDiv.width();
+            			     var dlgHeight = dlgDiv.height();
+            			     var parentHeight = parentDiv.height();
+            			     // TODO: change parentWidth and parentHeight in case of the grid
+            			     //  is larger as the browser window
+            			     dlgDiv[0].style.top = Math.round((parentHeight-dlgHeight)/2) + "px";
+            			     dlgDiv[0].style.left = Math.round((parentWidth-dlgWidth)/2) + "px";
+            			    }}
+            
+            
+            ); 
+            
+           // $("#jqGrid").jqGrid('navGrid','#jqGridPager');  
+            
         });
+        
+        function add(){
+        	  alert(098);
+        }
  
    </script>
 </html>

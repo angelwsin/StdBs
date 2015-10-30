@@ -35,7 +35,8 @@ public class DefExceptionHandler implements HandlerExceptionResolver{
 					}
 		        	 return new ModelAndView();
 		        }else{
-		        	 return new ModelAndView("error", model);
+		        	return null;
+		        	// return new ModelAndView("error", model);
 		        }
 	
 	}

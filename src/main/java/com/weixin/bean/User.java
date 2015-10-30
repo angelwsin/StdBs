@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //当前的类是一个持久化类，是Category这个类。他映射了一个表category。所对应的 数据库是test
@@ -95,6 +96,7 @@ public class User implements Serializable{
 	 //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
 	//inverseJoinColumns中对应的id为以下属性Role的对应id.
 	@Column(name = "addTime", nullable=false)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	public Date getAddTime() {
 		return addTime;
 	}
