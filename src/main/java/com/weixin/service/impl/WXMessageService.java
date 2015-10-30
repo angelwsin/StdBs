@@ -4,10 +4,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Service;
 
-import com.weixin.event.WXMessageEvent;
-import com.weixin.message.bean.WXMessage;
 import com.weixin.util.WXEventMessageApplicationContext;
 
 @Service
@@ -24,8 +23,8 @@ public class WXMessageService  implements ApplicationContextAware{
 	 * 利用spring的事件驱动处理
 	 * 接受微信信息处理的总入口
 	 */
-	public void onMessage(WXMessage message){
-		wxEventMessageApplicationContext.publishEvent(new WXMessageEvent(message));
+	public void onMessage(ApplicationEvent  event){
+		wxEventMessageApplicationContext.publishEvent(event);
 	}
 
 	      

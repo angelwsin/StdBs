@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.weixin.message.bean.WXBaseMessage;
 import com.weixin.service.FileService;
 import com.weixin.service.impl.TokenService;
 import com.weixin.util.Const;
@@ -32,7 +31,7 @@ public class WXMediaController extends BaseController{
 	    	         //  System.out.println(request.getParameter("file").getClass());
         	     MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request; 
         	     Map<String,MultipartFile> files = multipartRequest.getFileMap();
-        	     String  uploadDir  =  request.getServletContext().getRealPath(Const.UPLOAD_DIR.get(WXBaseMessage.MSG_IMAGE));
+        	     String  uploadDir  =  request.getServletContext().getRealPath(Const.UPLOAD_DIR.get(""));
         	    for(String key:files.keySet()){
         	    	MultipartFile file = files.get(key);
         	    	 int index = file.getOriginalFilename().lastIndexOf(".");

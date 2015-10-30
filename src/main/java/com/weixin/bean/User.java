@@ -3,11 +3,11 @@ package com.weixin.bean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //当前的类是一个持久化类，是Category这个类。他映射了一个表category。所对应的 数据库是test
 //这句：@Table(name="user",catalog="test") 可以省略
@@ -114,9 +116,10 @@ public class User implements Serializable{
 		this.bindStatus = bindStatus;
 	}
 	
-	    @ManyToMany
+	    @ManyToMany(fetch=FetchType.EAGER)
 	    @JoinTable(name="users_roles")
 	    @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	    @JsonIgnore
 	    public Set<Role> getRoles() {
 	        return roles;
 	    }

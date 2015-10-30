@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -27,7 +26,6 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.EntityBuilder;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -39,9 +37,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.weixin.message.bean.WXBaseMessage;
-import com.weixin.message.bean.WXCustTextMessage;
-import com.weixin.message.bean.WXCustTextRespMessage;
 import com.weixin.service.impl.TokenService;
 
 public class HttpClientUtils {
@@ -210,17 +205,7 @@ public class HttpClientUtils {
         	   params.put("access_token", TokenService.acessToken());
         	   params.put("type", "image");
 			   System.out.println(upload("https://api.weixin.qq.com/cgi-bin/media/upload", file, params,true));*/
-        	   WXCustTextRespMessage text = new WXCustTextRespMessage();
-        	   text.setTouser("owFQ-uBg7admIgc7wgcXzkiZa5Mk");
-        	   text.setMsgtype(WXBaseMessage.MSG_TEXT);
-        	   WXCustTextMessage t = new WXCustTextMessage();
-        	   t.setContent("你是狗");
-        	   text.setText(t);
-        	   Map<String,String> params = new HashMap<String,String>();
-        	   System.out.println(TokenService.acessToken());
-        	   params.put("access_token", TokenService.acessToken());
-        	   params.put("body", JSONUtil.encode(text));
-        	  System.out.println(doPost("https://api.weixin.qq.com/cgi-bin/message/custom/send", null, params, true)); 
+        	 
 		}
            
            

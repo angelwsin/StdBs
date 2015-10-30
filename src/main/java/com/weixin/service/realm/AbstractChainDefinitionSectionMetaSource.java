@@ -37,7 +37,7 @@ public abstract class AbstractChainDefinitionSectionMetaSource implements ChainD
         		  sb.append(key).append('=').append(permissionMap.get(key)).append(ChainDefinitionSectionMetaSourceService.CRLF);
         	  }
         }  
-        sb.append(ChainDefinitionSectionMetaSourceService.LAST_AUTH_STR);
+       // sb.append(ChainDefinitionSectionMetaSourceService.LAST_AUTH_STR);
         ini.load(sb.toString()); // 加载资源文件节点串  
         Section section = ini.getSection("urls"); // 使用默认节点  
         if (CollectionUtils.isEmpty(section)) {  

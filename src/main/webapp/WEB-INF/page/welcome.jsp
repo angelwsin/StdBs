@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,29 +22,30 @@
 	</script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 </head>
-<body>
-  <div style="margin-left:20px">
-    <table id="jqGrid"></table>
+<body style="width: 100%">
+  <div style="margin: 50px  100px  200px 260px ;width: 80%">
+    <table id="jqGrid" ></table>
     <div id="jqGridPager"></div>
 </div>
 </body>
 <script type="text/javascript"> 
         $(document).ready(function () {
             $("#jqGrid").jqGrid({
-                url: 'http://trirand.com/blog/phpjqgrid/examples/jsonp/getjsonp.php?callback=?&qwery=longorders',
+                url: '${root}/manager/User',
                 mtype: "GET",
 				styleUI : 'Bootstrap',
-                datatype: "jsonp",
+                datatype: "json",
                 colModel: [
-                    { label: 'OrderID', name: 'OrderID', key: true, width: 75 },
-                    { label: 'Customer ID', name: 'CustomerID', width: 150 },
-                    { label: 'Order Date', name: 'OrderDate', width: 150 },
-                    { label: 'Freight', name: 'Freight', width: 150 },
-                    { label:'Ship Name', name: 'ShipName', width: 150 }
+                    { label: 'username', name: 'username', key: true, width: 500 },
+                    { label: 'email', name: 'email', width: 150 },
+                    { label: 'password', name: 'password', width: 150 },
+                    { label: 'status', name: 'status', width: 150 },
+                    { label:'addTime', name: 'addTime', width: 300 }
                 ],
 				viewrecords: true,
                 height: 250,
-                rowNum: 20,
+                rowNum: 10,
+                width:600,
                 pager: "#jqGridPager"
             });
         });

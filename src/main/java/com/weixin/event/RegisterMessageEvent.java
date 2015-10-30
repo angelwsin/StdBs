@@ -2,12 +2,10 @@ package com.weixin.event;
 
 import org.springframework.context.ApplicationEvent;
 
-import com.weixin.bean.Resource;
-
 @SuppressWarnings("serial")
-public class SectionMetaEvent extends ApplicationEvent{
+public class RegisterMessageEvent extends ApplicationEvent{
 
-	public SectionMetaEvent(Resource source) {
+	public RegisterMessageEvent(Object source) {
 		super(source);
 		// TODO Auto-generated constructor stub
 	}

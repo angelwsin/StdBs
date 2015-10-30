@@ -88,6 +88,11 @@ public  class BaseDaoImpl<T> implements BaseDao<T> {
 		                 
 		      return   (T) getSession().get(getClazz(),id);
 	 }
+
+	public List<T> findAll(String clazz) {
+		// TODO Auto-generated method stub
+		return getSession().createQuery("from "+clazz).list();
+	}
 	 
 	 
 	

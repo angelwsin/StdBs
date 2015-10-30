@@ -31,4 +31,5 @@ public class HomeController extends BaseController{
 	       public String anon(){
 	    	   return "anon";
 	       }
+	       
 }

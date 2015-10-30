@@ -13,5 +13,6 @@ public interface BaseDao<T> {
 	 public T  findObjectById(Serializable id);
 	 public void saveOrUpdate(T entiry);
 	 public SessionFactory getSessionFactory() ;
+	 public List<T> findAll(String clazz);
 
 }

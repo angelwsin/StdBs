@@ -1,26 +1,8 @@
 package com.weixin.util;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
 import java.util.Properties;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
-
-import com.thoughtworks.xstream.XStream;
-import com.weixin.message.bean.WXMessage;
-import com.weixin.message.bean.WXNewItmesMessage;
-import com.weixin.message.bean.WXNewsRespMessage;
-import com.weixin.message.bean.WXPicSysPhotoMessage;
 
 public class WXMessageFactory {
 	         public static Properties  MESSAGETYPE = new Properties();
@@ -35,7 +17,7 @@ public class WXMessageFactory {
 			}
 	       }
 
-	public static WXMessage getMessageInstance(InputStream is) {
+	/*public static WXMessage getMessageInstance(InputStream is) {
 		SAXReader reader = new SAXReader();
 		BufferedReader r = null;
 		StringBuffer buffer = null;
@@ -116,10 +98,10 @@ public class WXMessageFactory {
 
 	         public static void main(String[] args) throws Exception{
 				
-			/*	FileInputStream is = new FileInputStream("d:\\message.txt");
+				FileInputStream is = new FileInputStream("d:\\message.txt");
 					  WXPicSysPhotoMessage msg =  (WXPicSysPhotoMessage) getMessageInstance(is);
-					 System.out.println(msg.getSendPicsInfo().getPicList().get(0).getPicMd5Sum());*/
-				   /*WXSendPicsInfoItem item1= new WXSendPicsInfoItem();
+					 System.out.println(msg.getSendPicsInfo().getPicList().get(0).getPicMd5Sum());
+				   WXSendPicsInfoItem item1= new WXSendPicsInfoItem();
 				   item1.setPicMd5Sum("0989ds");
 				   WXSendPicsInfoItem item2= new WXSendPicsInfoItem();
 				   item1.setPicMd5Sum("0989ds");
@@ -135,7 +117,7 @@ public class WXMessageFactory {
 				   info.setPicList(items);
 				   WXPicSysPhotoMessage msg1  = new WXPicSysPhotoMessage();
 				   msg1.setSendPicsInfo(info);
-				   System.out.println(getMessageToXml(msg1,new Class[]{WXSendPicsInfoItem.class}));*/
+				   System.out.println(getMessageToXml(msg1,new Class[]{WXSendPicsInfoItem.class}));
 	        	 
 	        	 WXNewsRespMessage resp = new WXNewsRespMessage();
 	        	 resp.setArticleCount(1);
@@ -151,6 +133,6 @@ public class WXMessageFactory {
 	        	 resp.addNewItmes(nes);
 	        	   System.out.println(getgetMessageToXmlWXNews(resp));
 	        	 
-			}
+			}*/
 
 }
