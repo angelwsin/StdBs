@@ -4,8 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service("accessTokenCache")
 public class AccessTokenCacheService {
-              public void flush(){
-            	  
-            	  
-              }
+                 public void  execute(){
+                	 System.out.println("task execute");
+                 }
 }

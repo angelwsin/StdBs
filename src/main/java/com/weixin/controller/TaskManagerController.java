@@ -32,8 +32,6 @@ public class TaskManagerController extends BaseController{
 	         public String taskManger(HttpServletRequest request,@PathVariable("op") String op){
 	        	   
 	        	    	 if(BaseController.QUERY.equals(op)){
-	        	    		
-							
 								try {
 									request.setAttribute("jobList", scheduleJobService.getAll());
 									request.setAttribute("runingList",secheulerTaskService.getRunningJob() );

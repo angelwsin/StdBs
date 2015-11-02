@@ -31,11 +31,11 @@
                 datatype: "json",
                 colNames: ["姓名", "邮件", "密码", "状态", "添加时间"],  
                 colModel: [
-                    {  name: 'username', key: true, width: 500, align: "center"},
+                    {  name: 'username', key: true, width: 500, align: "center",editable:true },
                     { name: 'email', width: 150, align: "center",editable:true },
                     {   name: 'password', width: 150 , align: "center",editable:true},
                     { name: 'status', width: 150, align: "center",editable:true },
-                    { name: 'addTime', width: 300 , align: "center",editable:true}
+                    { name: 'addTime', width: 300 , align: "center"}
                 ],
                 scroll:false,
                 gridComplete: function(){//caption居中
@@ -45,7 +45,7 @@
                 	                 .children("span.ui-jqgrid-title")
                 	                .css("float", "none");
                 	         },
-                editurl:'${root}/manager/User/add',
+                editurl:'${root}/manager/User/edit',
                 caption:'用户信息列表',
                 rowList:[10,20,30],
 				viewrecords: true,
@@ -63,7 +63,7 @@
                 },
                 pager: "#jqGridPager"
             }).navGrid('#jqGridPager', 
-            		{ add: true, edit: true, del: true,search:true,refresh:true },
+            		{ add: true, afterAdd:add,edit: true, del: true,search:true,refresh:true },
             			{ beforeShowForm: function(form) {
             			     // "editmodlist"
             			     var dlgDiv = $("#editmod" + grid[0].id);

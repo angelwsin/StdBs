@@ -11,7 +11,6 @@ import javax.persistence.Table;
 /*
  *  注意：jobName 跟 groupName的组合应该是唯一的,beanClass springId至少有一个
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name="task_wx")
 public class ScheduleJob {

@@ -47,12 +47,20 @@ public class BaseController {
 	 	
 	 	
 	 	public  Map<String,Object>  requestToMap(HttpServletRequest request){
-	 		Enumeration<String>  paramNames =   request.getParameterNames();
+	 	//	Enumeration<String>  paramNames =   request.getParameterNames();
 	 		Map<String,Object> map = new HashMap<String, Object>();
-	 		 while(paramNames.hasMoreElements()){
+	 		Map<String,String[]> reqMap = request.getParameterMap();
+	 		 for(String key :reqMap.keySet()){
+        		   if(reqMap.get(key).length==1){
+        			   map.put(key, reqMap.get(key)[0]);
+        		   }else{
+        			   map.put(key,  reqMap.get(key));
+        		   }
+        	 }
+	 		/* while(paramNames.hasMoreElements()){
 	 			 String param = paramNames.nextElement();
 	 			 map.put(param, request.getParameter(param));
-	 		 }
+	 		 }*/
 	 		 return map;
 	 	}
 	 	

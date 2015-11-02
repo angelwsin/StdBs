@@ -28,9 +28,6 @@ public class ManagerController extends BaseController{
 	            	   int  pageSize = Integer.valueOf(request.getParameter("rows"));
 	            	 LOGGER.info(" 取得当前页数 page:"+curPage);
 	            	 LOGGER.info("取得每页显示行数 rows:"+pageSize);
-	            	 for(String key :request.getParameterMap().keySet()){
-	            		 System.out.println(key+":"+request.getParameterMap().get(key));
-	            	 }
 	            	  Page page = new Page();
 	            	  page.setCurPage(curPage);
 	            	  page.setPageSize(pageSize);
@@ -42,7 +39,6 @@ public class ManagerController extends BaseController{
 				@RequestMapping("/{beanClass}/edit")
 	             public String edit(@RequestParam("oper")String oper,@PathVariable("beanClass") String beanClass,HttpServletRequest request){
 	            	           if("add".equals(oper)){
-	            	        	  
 	            	        	    baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
 	            	        	    return null;
 	            	           }else{
