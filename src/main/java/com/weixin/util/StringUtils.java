@@ -61,5 +61,8 @@ public class StringUtils {
 	   public static String  getAndSet(String setAndGet,String field){
 		               return setAndGet+field.substring(0, 1).toUpperCase()+field.substring(1);
 	   }
+	   public static String  firstToLowerCase(String field){
+           return field.substring(0, 1).toLowerCase()+field.substring(1);
+}
 
 }

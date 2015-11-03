@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.weixin.bean.ScheduleJob;
 
-public interface ScheduleJobService {
+public interface ScheduleJobService extends BaseService<ScheduleJob> {
            public void save(ScheduleJob job);
            public List<ScheduleJob> getAll();
            public void execute(ScheduleJob job);

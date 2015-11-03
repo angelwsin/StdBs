@@ -34,6 +34,13 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 				page.setTotalPage(page.getCountPage());
                 return baseDao.queryByPage(hql, page);
 			}
+
+			public void del(T entity) {
+				// TODO Auto-generated method stub
+				baseDao.del(entity);
+			}
+
+			
 	        
 	       
 	      

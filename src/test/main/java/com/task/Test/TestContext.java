@@ -8,7 +8,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.weixin.service.BaseService;
 import com.weixin.service.ScheduleJobService;
+import com.weixin.util.SpringUtils;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +21,8 @@ public class TestContext {
       
 	 @Autowired
 	      private ScheduleJobService scheduleJobService;
-	
+	     @Autowired
+	     private SpringUtils springUtils;
 	
 	         @Test
 	         public void test(){
@@ -32,6 +35,6 @@ public class TestContext {
 	        		  card.setStatus(0);
 	        		  actCardService.save(card);
 	        	  }*/
-	        	
+	        System.out.println((BaseService) springUtils.getBean("userServiceImpl"));	;
 	         }
 }

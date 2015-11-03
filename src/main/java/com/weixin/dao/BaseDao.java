@@ -18,6 +18,7 @@ public interface BaseDao<T> {
 	 public List<T> findAll(String clazz);
 	 public List<T> queryByPage(String HQL, Page<T> page);
      public  int  getTotalRows(String hql);
+ 	public void del(T entity) ;
 
 
 }

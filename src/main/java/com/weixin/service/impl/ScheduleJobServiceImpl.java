@@ -16,7 +16,7 @@ import com.weixin.service.task.SchedulerTaskServiceImpl;
 
 
 @Service("scheduleJobServiceImpl")
-public class ScheduleJobServiceImpl implements ScheduleJobService{
+public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJob> implements ScheduleJobService{
 	 private static final Logger LOGGER =  LoggerFactory.getLogger(ScheduleJobServiceImpl.class);
       @Autowired
 	  private ScheduleJobDao scheduleJobDao;

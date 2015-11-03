@@ -55,7 +55,7 @@
                 	                 .children("span.ui-jqgrid-title")
                 	                .css("float", "none");
                 	         },
-                editurl:'${root}/manager/ScheduleJob/edit',
+                editurl:'${root}/manager/ScheduleJob/edit?service=scheduleJobServiceImpl',
                 caption:'调度任务列表',
                 rowList:[10,20,30],
 				viewrecords: true,

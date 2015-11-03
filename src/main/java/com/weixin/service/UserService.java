@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.weixin.bean.User;
 
 
-public interface UserService {
+public interface UserService extends BaseService<User>{
 	
 	public void save(User user);
 	

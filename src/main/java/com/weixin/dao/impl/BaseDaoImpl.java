@@ -114,6 +114,13 @@ public  class BaseDaoImpl<T> implements BaseDao<T> {
 		 Long c =(Long) query.uniqueResult();
 		return c.intValue();
 	}
+
+	public void del(T entity) {
+		// TODO Auto-generated method stub
+		getSession().delete(entity);
+	}
+
+	
 	 
 	 
 	

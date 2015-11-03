@@ -1,25 +1,28 @@
 package com.weixin.controller;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.weixin.bean.Page;
 import com.weixin.service.BaseService;
 import com.weixin.util.ObjectUtils;
+import com.weixin.util.SpringUtils;
+import com.weixin.util.StringUtils;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerController extends BaseController{
 	private static final Logger LOGGER = LogManager.getLogger(ManagerController.class);
-                 @Resource(name="baseService")
-	             private  BaseService  baseService;
+                @Autowired
+	             private  BaseService<Object>  baseService;
 	             @SuppressWarnings("unchecked")
 				@RequestMapping(value="/{beanClass}", produces = "application/json;charset=UTF-8")
 	             @ResponseBody
@@ -35,14 +38,29 @@ public class ManagerController extends BaseController{
 	            	return  page; 
 	             }
 	             
-	             @SuppressWarnings("unchecked")
+	            
+				@SuppressWarnings({ "unchecked", "rawtypes" })
 				@RequestMapping("/{beanClass}/edit")
-	             public String edit(@RequestParam("oper")String oper,@PathVariable("beanClass") String beanClass,HttpServletRequest request){
+	             public void edit(@RequestParam("oper")String oper,@PathVariable("beanClass") String beanClass,HttpServletRequest request,@RequestParam(value="service", required=false)String service){
 	            	           if("add".equals(oper)){
-	            	        	    baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
-	            	        	    return null;
-	            	           }else{
-	            	        	   return null;
+	            	        	   if(StringUtils.isEmpty(service)){
+	            	        		   baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
+		            	        	    return ;
+	            	        	   }
+	            	        	  ((BaseService) SpringUtils.getBean(service)).save(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
+	            	        	 
+	            	           }else if("del".equals(oper)){
+	            	        	   if(StringUtils.isEmpty(service)){
+	            	        		   baseService.del(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
+		            	        	    return ;
+	            	        	   }
+	            	        	  ((BaseService) SpringUtils.getBean(service)).del(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
+	            	           }else if("edit".equals(oper)){
+	            	        	   if(StringUtils.isEmpty(service)){
+	            	        		   baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
+		            	        	    return ;
+	            	        	   }
+	            	        	  ((BaseService) SpringUtils.getBean(service)).save(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
 	            	           }
 	             }
 

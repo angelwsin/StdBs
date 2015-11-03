@@ -50,7 +50,7 @@ public class TaskManagerController extends BaseController{
 	        	    
 	         }
 	         
-	         @RequestMapping(value="/add/Update",method=RequestMethod.POST)
+	         @RequestMapping(value="/edit",method=RequestMethod.POST)
 	         public String addAndUpdate(HttpServletRequest request,HttpServletResponse response,ScheduleJob job){
 	        	 String op = request.getParameter("op");
 	        	 if(BaseController.ADD.equals(op)){

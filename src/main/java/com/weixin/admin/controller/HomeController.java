@@ -4,16 +4,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.weixin.bean.User;
 import com.weixin.controller.BaseController;
+import com.weixin.util.Menu;
 
 @Controller
 @RequestMapping("/admin/home")
 public class HomeController extends BaseController{
-	       @RequestMapping("/login")
+	       @RequestMapping(value="/login",params={"zhang=san","lis=dls"})
+	       @Menu(name="登录")
            public String login(User user,HttpServletRequest request){
 	    	      if(!isPost(request)){
 	    	    	   return "login";
@@ -27,9 +30,13 @@ public class HomeController extends BaseController{
 	       public String user(){
 	    	   return "welcome";
 	       }
-	       @RequestMapping("/anon")
+	       @RequestMapping("/logout")
 	       public String anon(){
-	    	   return "anon";
+	    	   Subject subject = SecurityUtils.getSubject();
+	    		if (subject.isAuthenticated()) {
+	    			subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+	    		}
+	    	   return "redirect:/login";
 	       }
 	       
 }

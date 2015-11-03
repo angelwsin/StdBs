@@ -10,6 +10,7 @@ public interface BaseService<T> {
 	  
 	  public List<T> queryAll(String clazz);
 	  public List<T> queryByPage(String clazz,Page<T> page);
+		public void del(T entity) ;;
 	  
 
 }

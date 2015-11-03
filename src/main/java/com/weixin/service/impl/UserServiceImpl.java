@@ -17,7 +17,7 @@ import com.weixin.util.HttpClientUtils;
 import com.weixin.util.JSONUtil;
 
 @Service("userServiceImpl")
-public class UserServiceImpl  implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User>  implements UserService{
           private UserDao userDaoImpl;
          
 		public UserDao getUserDaoImpl() {

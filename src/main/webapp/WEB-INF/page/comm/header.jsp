@@ -15,7 +15,12 @@
     <!-- The link to the CSS that the grid needs -->
     <link rel="stylesheet" type="text/css" media="screen" href="${root }/css/ui.jqgrid-bootstrap.css" />
 	<script src="${root }/js/bootstrap/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" media="screen" href="${root }/css/jquery-ui.css" />
-	<script type="text/javascript" src="${root }/js/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="${root }/css/jquery-ui-1.10.0.custom.css" />
+	<script type="text/javascript" src="${root }/js/jquery-ui-1.10.3.custom.min.js"></script>
 </head>
+<style type="text/css">
+.ui-jqgrid-sortable{
+text-align: center;
+}
+</style>
 

@@ -7,19 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@include file="comm/header.jsp" %>
-<style type="text/css">
-.ui-th-column-header
-{
- text-align: center;
-}
-</style>
+
 </head>
 <body style="width: 100%">
   <div style="margin: 50px  100px  200px 100px ;width: 80%">
     <table id="jqGrid" ></table>
     <div id="jqGridPager"></div>
 </div>
- 
+ <div id="res-dialog">
+ </div>
 </body>
 <script type="text/javascript"> 
         $(document).ready(function () {
@@ -88,6 +84,47 @@
         function add(){
         	  alert(098);
         }
+        
+      /*   $('#res-dialog').dialog({
+	        title : '修改记录',
+	        height : 300,
+	        width : 800,
+	        modal:true,
+	        resizable : false,
+	        buttons: [{
+	            text: "提交",
+	            click: function() {
+	            	var inData = getData("detailInfo");
+	            	
+	            	    if(inData["dbUserpwd"]==""){
+	            	    	inData["dbUserpwd"]=$('#'+inData['dbId']+'pwd').val();
+	            	    }
+	        			//增加操作标志
+	        			inData["oper"]="edit";
+	        			
+	        			//调用新增方法
+	        			ajaxDataOnSuccess(inData,"manage/DBInfo",function(data){
+	        				 if(data.result){
+	        					//提示成功信息
+	             				showMsg(data.message,"success");
+	             				//重新加载查询列表
+	             				$("#gridTable").jqGrid("setGridParam",{
+	             					datatype: 'json',
+	             				}).trigger("reloadGrid", [{page:1}]);
+	             				 $('#res-dialog').dialog("close");
+	        				 }else{
+	        					 showMsg(data.message,"error");
+	        				 }
+	        				
+	        			});
+	            }
+	          },{
+	              text: "取消",
+	              click: function() { $(this).dialog("close"); }
+	        }]
+	        
+	    }); */
+    	
  
    </script>
 </html>
