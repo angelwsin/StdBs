@@ -10,6 +10,10 @@ public interface ChainDefinitionSectionMetaSourceService {
 	    public static final String CRLF= "\r\n";
 
 	    public  static final String LAST_AUTH_STR= "/** =authc\r\n";
+	    public  static final String PERMS= "perms";
+	    public  static final String ROLES= "roles";
+	    public  static final String USER= "user:";
+	    
 	  
 	    /** 初始化框架权限资源配置 */  
 	    public abstract void intiPermission();  

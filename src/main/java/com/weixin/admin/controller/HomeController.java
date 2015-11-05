@@ -15,7 +15,7 @@ import com.weixin.util.Menu;
 @Controller
 @RequestMapping("/admin/home")
 public class HomeController extends BaseController{
-	       @RequestMapping(value="/login",params={"zhang=san","lis=dls"})
+	       @RequestMapping(value="/login")
 	       @Menu(name="登录")
            public String login(User user,HttpServletRequest request){
 	    	      if(!isPost(request)){

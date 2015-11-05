@@ -114,10 +114,50 @@ public  class BaseDaoImpl<T> implements BaseDao<T> {
 		 Long c =(Long) query.uniqueResult();
 		return c.intValue();
 	}
+	public int getTotalRows(String hql,Map<String,Object> params) {
+		// TODO Auto-generated method stub
+		 StringBuffer Hql =new StringBuffer( "select count(0) ").append(hql);
+		Query query = getSession().createQuery(Hql.toString());
+		if(params!=null&&params.keySet().size()>0){
+			 for(String key:params.keySet()){
+				   query.setParameter(key, params.get(key));
+			 }
+		 }
+		 Long c =(Long) query.uniqueResult();
+		return c.intValue();
+	}
 
 	public void del(T entity) {
 		// TODO Auto-generated method stub
 		getSession().delete(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> queryByPage(String hql, Page<T> page, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		Query query = getSession().createQuery(hql);
+		 if(params!=null&&params.keySet().size()>0){
+			 for(String key:params.keySet()){
+				   query.setParameter(key, params.get(key));
+			 }
+		 }
+		query.setFirstResult(page.getStartPage());
+		query.setMaxResults(page.getPageSize());
+		page.setList(query.list());
+		return query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> queryByPage(String hql, Page<T> page, Object bean) {
+		// TODO Auto-generated method stub
+		Query query = getSession().createQuery(hql);
+		 if(bean!=null){
+			query.setProperties(bean);
+		 }
+		query.setFirstResult(page.getStartPage());
+		query.setMaxResults(page.getPageSize());
+		page.setList(query.list());
+		return query.list();
 	}
 
 	

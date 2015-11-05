@@ -64,7 +64,7 @@ public class UserTest {
               //roleService.save(r);
              //userService.save(user);
               Resource res = new Resource();
-              res.setPermissions("anon");
+             // res.setPermissions("anon");
               res.setValue("/index");
              // resourceService.save(res);
    

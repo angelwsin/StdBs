@@ -49,10 +49,12 @@ public class SchedulerTaskServiceImpl {
         // 这里从数据库中获取任务信息数据  
       LOGGER.info(" loading task job ...");
        List<ScheduleJob> jobList = scheduleJobService.getInitAll();  
-     
-       for (ScheduleJob job : jobList) {
-            addJob(job);  
-       }  
+     if(jobList!=null){
+    	 for (ScheduleJob job : jobList) {
+             addJob(job);  
+        }  
+     }
+       
     }  
 	
 	/** 

@@ -1,5 +1,6 @@
 package com.task.Test;
 
+import org.hibernate.metamodel.relational.Exportable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,6 @@ public class TestContext {
 	        		  actCardService.save(card);
 	        	  }*/
 	        System.out.println((BaseService) springUtils.getBean("userServiceImpl"));	;
+	        
 	         }
 }

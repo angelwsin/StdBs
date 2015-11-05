@@ -9,10 +9,20 @@
 <%@include file="/WEB-INF/page/comm/header.jsp" %>
 </head>
 <body>
-          <div style="margin: 50px  100px  200px 100px ;width: 40%">
+          <div style="margin: 50px  100px  200px 100px ;width: 40%;float: left;">
     <table id="jqGrid" ></table>
     <div id="jqGridPager"></div>
 </div>
+
+ <div style="margin: 50px  0px  0px 10px ;width: 40%;float: left;">
+    <table id="jqGridR" ></table>
+    <div id="jqGridPagerR"></div>
+</div>
+ <div id="res-dialog" style="display: none;">
+    <form action="addRole">
+     <input type="text">
+     </form>
+ </div>
           
 </body>
 <script type="text/javascript">
@@ -23,10 +33,11 @@
                 mtype: "GET",
 				styleUI : 'Bootstrap',
                 datatype: "json",
-                colNames: ["角色 ", "描述"],  
+                colNames: ["角色 ", "描述","操作"],  
                 colModel: [
                     {  name: 'name', key: true, width: 60, align: "center",editable:true },
                     { name: 'description', width: 150, align: "center",editable:true },
+                    { name: 'Edit', width: 150, align: "center"}
                 ],
                 scroll:false,
                 gridComplete: function(){//caption居中
@@ -35,6 +46,12 @@
                 	                .css("text-align", "center")
                 	                 .children("span.ui-jqgrid-title")
                 	                .css("float", "none");
+                            var ids = jQuery("#jqGrid").jqGrid('getDataIDs');
+                            for (var i = 0; i < ids.length; i++) {
+                            var id = ids[i];
+                            var editBtn = "<a href='#' style='color:#f60' onclick=OpenAllocationDialog('"+ids[i]+"') >Edit</a>";
+                            jQuery("#jqGrid").jqGrid('setRowData', ids[i], { Edit: editBtn });
+                            }
                 	         },
                 editurl:'${root}/manager/Role/edit',
                 caption:'角色列表',
@@ -52,13 +69,79 @@
                     records: "total",//总行数 
                     repeatitems : false
                 },
+                onSelectRow : function (ids){
+                	var rowDatas = jQuery('#jqGrid').jqGrid('getRowData',ids);
+                      rowDatas["name"]
+                },
                 pager: "#jqGridPager"
             }).navGrid('#jqGridPager', 
             		{ add: true,edit: true, del: true,search:true,refresh:true }
             ); 
             
+           
+            
            // $("#jqGrid").jqGrid('navGrid','#jqGridPager');  
             
         });
+ 
+ $(function(){
+	 var gridR = $("#jqGridR"); 
+     $("#jqGridR").jqGrid({
+         url: '${root}/manager/Resource',
+         mtype: "GET",
+			styleUI : 'Bootstrap',
+         datatype: "json",
+         colNames: ["资源路径 ", "权限"],  
+         colModel: [
+             {  name: 'value', key: true, width: 500, align: "center",editable:true },
+             { name: 'permissions', width: 150, align: "center",editable:true },
+         ],
+         scroll:false,
+         gridComplete: function(){//caption居中
+                     $('#jqGridR').closest("div.ui-jqgrid-view")
+                         .children("div.ui-jqgrid-titlebar")
+         	                .css("text-align", "center")
+         	                 .children("span.ui-jqgrid-title")
+         	                .css("float", "none");
+         	         },
+         editurl:'${root}/manager/ScheduleJob/edit',
+         caption:'资源列表',
+         rowList:[10,20,30],
+			viewrecords: true,
+         height: 400,
+         rowNum: 10,
+         autowidth:true,
+         rownumbers:true,//添加左侧行号
+         jsonReader:{
+         	 root: "list",//返回的数组集合
+             id: "id",//设置返回参数中，表格ID的名字为id
+             total: "totalPage", //总页数 
+             page: "curPage",//当前页数
+             records: "total",//总行数 
+             repeatitems : false
+         },
+         pager: "#jqGridPagerR"
+     }).navGrid('#jqGridPagerR', 
+     		{ add: true,edit: true, del: true,search:true,refresh:true }
+     ); 
+ })
+ 
+ function OpenAllocationDialog(ids){
+	   var rowDatas = jQuery('#jqGrid').jqGrid('getRowData',ids);
+       var name = rowDatas["name"];
+       var obj = {'name':name};
+	 ajaxDataOnSuccess("","manager/Resource",function(data){
+		 if(data.result){
+			//提示成功信息
+				showMsg(data.message,"success");
+				//重新加载查询列表
+				
+				 $('#res-dialog').dialog("close");
+		 }else{
+			 showMsg(data.message,"error");
+		 }
+		
+	});
+ }
  </script>
 </html>

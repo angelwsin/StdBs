@@ -15,5 +15,9 @@ public class UserController {
 	       public String role(){
 	    	    return "admin/user/role";
 	       }
+	       @RequestMapping("/menu")
+	       public String menu(){
+	    	    return "admin/user/menu";
+	       }
 
 }

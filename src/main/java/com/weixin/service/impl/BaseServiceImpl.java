@@ -3,6 +3,7 @@ package com.weixin.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -38,6 +39,29 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 			public void del(T entity) {
 				// TODO Auto-generated method stub
 				baseDao.del(entity);
+			}
+
+			public List<T> queryByPage(String clazz, Page<T> page, Map<String, Object> params) {
+				// TODO Auto-generated method stub
+				StringBuffer hql = new StringBuffer("from ").append(clazz);
+				 if(params!=null&&params.keySet().size()>0){
+					 hql.append(" where 1=1 ");
+					 for(String key:params.keySet()){
+						 hql.append(" and ").append(key).append("=").append(":").append(key);
+					 }
+				 }
+				 System.out.println(hql.toString());
+				page.setTotal(baseDao.getTotalRows(hql.toString(),params));
+				page.setTotalPage(page.getCountPage());
+                return baseDao.queryByPage(hql.toString(), page,params);
+			}
+
+			public List<T> queryByPage(String clazz, Page<T> page, Object bean) {
+				// TODO Auto-generated method stub
+				String hql = "from "+clazz;
+				page.setTotal(baseDao.getTotalRows(hql));
+				page.setTotalPage(page.getCountPage());
+                return baseDao.queryByPage(hql, page,bean);
 			}
 
 			

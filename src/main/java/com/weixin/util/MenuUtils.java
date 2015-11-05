@@ -1,7 +1,9 @@
 package com.weixin.util;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +19,16 @@ public class MenuUtils {
 	            	           if(!clazz.isAnnotationPresent(Controller.class)){
 	            	        	   return ;
 	            	           }
-	            	           StringBuffer  path = new StringBuffer();
+	            	          
 	            	            String pre = null;
 	            	          if( clazz.isAnnotationPresent(RequestMapping.class)){
 	            	        	  RequestMapping map =   clazz.getAnnotation(RequestMapping.class);
 	            	        	   pre = map.value()[0];
 	            	          }
-	            	           
 	            	          Method[] methods =    clazz.getMethods();
 	            	          for(Method m:methods){
 	            	        	    if(Arrays.asList(method).contains(m.getName())){
+	            	        	    	 StringBuffer  path = new StringBuffer();
 	            	        	    	  if(m.isAnnotationPresent(RequestMapping.class)){
 	            	        	    		  RequestMapping mp =   m.getAnnotation(RequestMapping.class);
 	            	        	    		   path.append(pre).append(mp.value()[0]);
@@ -43,8 +45,7 @@ public class MenuUtils {
 	            	        	    	  }
 	            	        	    	  if(m.isAnnotationPresent(Menu.class)){
 	            	        	    		  Menu menu = 	  m.getAnnotation(Menu.class);
-	            	        	    		  System.out.println(menu.name());
-	            	        	    		  System.out.println(path.toString());
+	            	        	
 	            	        	    	  }
 	            	        	    }
 	            	          }
