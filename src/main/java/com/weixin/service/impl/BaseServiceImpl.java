@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.weixin.bean.Page;
 import com.weixin.dao.BaseDao;
 import com.weixin.service.BaseService;
+import com.weixin.util.ObjectUtils;
 
 @Service("baseService")
 public class BaseServiceImpl<T> implements BaseService<T>{
@@ -63,6 +64,23 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 				page.setTotalPage(page.getCountPage());
                 return baseDao.queryByPage(hql, page,bean);
 			}
+
+			public void del(String classBean, Map<String, Object> requestMap) {
+				// TODO Auto-generated method stub
+				String hql = "delete from "+classBean;
+			   Object[] pV = 	ObjectUtils.mapToHql(hql, classBean, requestMap);
+			   baseDao.delByHql((String)pV[0],( Object[])pV[1]);
+			   
+			}
+
+			public int update(String classBean, Map<String, Object> requestMap) {
+				// TODO Auto-generated method stub
+			  Object   obj = 	baseDao.findObjectById(ObjectUtils.getClazz(classBean), ObjectUtils.mapToId(classBean, requestMap));
+			   ObjectUtils.mapToUpate(obj, requestMap);
+				return 0;
+			}
+
+		
 
 			
 	        

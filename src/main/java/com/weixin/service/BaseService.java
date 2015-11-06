@@ -14,6 +14,8 @@ public interface BaseService<T> {
 	  public List<T> queryByPage(String clazz,Page<T> page,Map<String,Object> params);
 	  public List<T> queryByPage(String clazz, Page<T> page,Object bean) ;
 		public void del(T entity) ;
+		public void del(String classBean,Map<String,Object> requestMap);
+		public int  update(String classBean,Map<String,Object> requestMap);
 	  
 
 }

@@ -29,14 +29,16 @@
  $(document).ready(function () {
         	var grid = $("#jqGrid"); 
             $("#jqGrid").jqGrid({
-                url: '${root}/manager/Role',
+                url: '${root}/manager/Menu',
                 mtype: "GET",
 				styleUI : 'Bootstrap',
                 datatype: "json",
-                colNames: ["角色 ", "描述","操作"],  
+                colNames: ["id","菜单名称 ", "排序","状态","操作"],  
                 colModel: [
-                    {  name: 'name', key: true, width: 60, align: "center",editable:true },
-                    { name: 'description', width: 150, align: "center",editable:true },
+                    {  name: 'id', key: true, width:160, align: "center",hidden:true },
+                    {  name: 'nameM', width:160, align: "center",editable:true },
+                    { name: 'order', width: 50, align: "center",editable:true },
+                    { name: 'status', width: 150, align: "center",editable:true },
                     { name: 'Edit', width: 150, align: "center"}
                 ],
                 scroll:false,
@@ -53,8 +55,8 @@
                             jQuery("#jqGrid").jqGrid('setRowData', ids[i], { Edit: editBtn });
                             }
                 	         },
-                editurl:'${root}/manager/Role/edit',
-                caption:'角色列表',
+                editurl:'${root}/manager/Menu/edit',
+                caption:'菜单列表',
              //   rowList:[10,20,30],
 				viewrecords: true,
                 height: 400,
@@ -91,10 +93,12 @@
          mtype: "GET",
 			styleUI : 'Bootstrap',
          datatype: "json",
-         colNames: ["资源路径 ", "权限"],  
+         colNames: ["id","资源名称", "资源路径","权限类型"],  
          colModel: [
-             {  name: 'value', key: true, width: 500, align: "center",editable:true },
-             { name: 'permissions', width: 150, align: "center",editable:true },
+                    {  name: 'id', key: true, width:160, align: "center",hidden:true },
+                    {  name: 'name',  width: 500, align: "center",editable:true },
+             {  name: 'value', width: 500, align: "center",editable:true },
+             { name: 'type', width: 150, align: "center",editable:true },
          ],
          scroll:false,
          gridComplete: function(){//caption居中
@@ -104,7 +108,7 @@
          	                 .children("span.ui-jqgrid-title")
          	                .css("float", "none");
          	         },
-         editurl:'${root}/manager/ScheduleJob/edit',
+         editurl:'${root}/manager/Resource/edit',
          caption:'资源列表',
        //  rowList:[10,20,30],
 			viewrecords: true,

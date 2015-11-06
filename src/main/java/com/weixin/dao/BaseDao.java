@@ -22,6 +22,9 @@ public interface BaseDao<T> {
  	public List<T> queryByPage(String hql, Page<T> page, Map<String, Object> params) ;
  	public List<T> queryByPage(String clazz, Page<T> page, Object bean) ;
  	public int getTotalRows(String hql,Map<String,Object> params);
+	public void delByHql(String hql,Object[] values);
+	public void update(Object entity);
+	public Object  findObjectById(Class<?> clazz,Serializable id);
 
 
 }

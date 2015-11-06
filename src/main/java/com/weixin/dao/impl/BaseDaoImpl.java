@@ -160,6 +160,22 @@ public  class BaseDaoImpl<T> implements BaseDao<T> {
 		return query.list();
 	}
 
+	public void delByHql(String hql, Object[] values) {
+		// TODO Auto-generated method stub
+		 Query query =  getSession().createQuery(hql);
+		 for(int i=0;values!=null&&i<values.length;i++){
+			   query.setParameter(i, values[i]);
+		 }
+		 query.executeUpdate();
+	}
+
+	public void update(Object entity) {
+		// TODO Auto-generated method stub
+		getSession().update(entity);
+	}
+	public Object  findObjectById(Class<?> clazz,Serializable id){
+	      return   getSession().get(clazz,id);
+}
 	
 	 
 	 

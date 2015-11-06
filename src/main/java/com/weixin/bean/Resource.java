@@ -2,6 +2,7 @@ package com.weixin.bean;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Resource {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	@ManyToOne(targetEntity=ResourceMeta.class)
+	@ManyToOne(targetEntity=ResourceMeta.class,cascade=CascadeType.PERSIST)
     @JoinTable(name="res_permissions")
     @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	public Set<ResourceMeta> getPermissions() {

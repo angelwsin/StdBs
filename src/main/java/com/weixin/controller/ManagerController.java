@@ -47,26 +47,27 @@ public class ManagerController extends BaseController{
 	            	           if("add".equals(oper)){
 	            	        	   if(StringUtils.isEmpty(service)){
 	            	        		   baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
-	            	        		   writeJson(response, new Message("ok", "success"));
+	            	        		   writeJson(response, new Message("success", "success"));
 		            	        	    return null ;
 	            	        	   }
 	            	        	  ((BaseService) SpringUtils.getBean(service)).save(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
 	            	        	 
 	            	           }else if("del".equals(oper)){
 	            	        	   if(StringUtils.isEmpty(service)){
-	            	        		   baseService.del(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
-	            	        		   writeJson(response, new Message("ok", "success"));
+	            	        		   baseService.del(beanClass, requestToMap(request));
+	            	        		   writeJson(response, new Message("success", "success"));
 		            	        	    return null ;
 	            	        	   }
 	            	        	  ((BaseService) SpringUtils.getBean(service)).del(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
 	            	           }else if("edit".equals(oper)){
 	            	        	   if(StringUtils.isEmpty(service)){
-	            	        		   baseService.save(ObjectUtils.mapToObject(beanClass,requestToMap(request) ));
-	            	        		   writeJson(response, new Message("ok", "success"));
+	            	        		   baseService.update(beanClass,requestToMap(request) );
+	            	        		   writeJson(response, new Message("success", "success"));
 		            	        	    return null ;
 	            	        	   }
 	            	        	  ((BaseService) SpringUtils.getBean(service)).save(ObjectUtils.mapToObject(beanClass,requestToMap(request)));
 	            	           }
+	            	           writeJson(response, new Message("success", "success"));
 	            	           return null;
 	             }
 

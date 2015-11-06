@@ -1,6 +1,5 @@
 package com.task.Test;
 
-import org.hibernate.metamodel.relational.Exportable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.weixin.bean.Resource;
 import com.weixin.service.BaseService;
 import com.weixin.service.ScheduleJobService;
 import com.weixin.util.SpringUtils;
@@ -24,6 +24,8 @@ public class TestContext {
 	      private ScheduleJobService scheduleJobService;
 	     @Autowired
 	     private SpringUtils springUtils;
+	     @Autowired
+	     private BaseService<Object> baseService;
 	
 	         @Test
 	         public void test(){
@@ -36,7 +38,12 @@ public class TestContext {
 	        		  card.setStatus(0);
 	        		  actCardService.save(card);
 	        	  }*/
-	        System.out.println((BaseService) springUtils.getBean("userServiceImpl"));	;
-	        
+	      //  System.out.println((BaseService) springUtils.getBean("userServiceImpl"));	;
+	        	 Resource s = new Resource();
+	        	 s.setId(1);
+	        	 s.setName("首页");
+	        	 s.setType("perms");
+	        	 s.setValue("/index");
+	           baseService.update(s);
 	         }
 }
